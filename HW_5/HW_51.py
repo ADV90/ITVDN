@@ -1,6 +1,7 @@
 def hello(name='Dima'):
     print('Hello, ', name, '!', sep='')
 
+
 hello('Test')
 hello()
 
