@@ -23,8 +23,9 @@ class Book:
         self.clist.append(review)
 
     def __str__(self):
-        return f"Автор: {self.author} \nНаименование: {self.title} \nГод: {self.year} \nЖанр: {self.genre} \n" \
-               f"{self.clist} \n"
+        return ("Автор: {} \nНаименование: {} \nГод: {} \nЖанр: {} \n".format(self.author, self.title, self.year,
+                                                                              self.genre)
+                + '\n'.join(str(review) for review in self.clist) + '\n')
 
     # def __repr__(self):
     #     return f"Автор: {self.author} \nНаименование: {self.title} \nГод: {self.year} \nЖанр: {self.genre} \n"
