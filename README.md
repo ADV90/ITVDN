@@ -1,6 +1,11 @@
 # ITVDN
 ____
-# Python Starter
+[Python Starter](#PythonStarter)
+[Python Essential](#PythonEssential)
+
+
+<a name="PythonStarter"></a>
+# Python Starter 
 
 ## 1. Введение в Python
 
@@ -139,6 +144,7 @@ y = 2x при x > 5.
 
 ____
 
+<a name="PythonEssential"></a>
 # Python Essential
 
 ## 1. ООП - Классы, атрибуты, методы, конструктор
