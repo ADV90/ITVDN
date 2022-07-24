@@ -8,6 +8,7 @@ ops = {
     '/': operator.truediv
 }
 
+
 def calc(a, oper):
     global answer
     try:
@@ -29,6 +30,7 @@ def calc(a, oper):
     except ValueError:
         raise Warning('Error')
     print(answer, ' ', end='')
+
 
 while oper != '=':
     if a == None:
@@ -52,7 +54,7 @@ while oper != '=':
             break
         elif oper == 'c':
             a = None
-        elif oper in ('+','-','*','/'):
+        elif oper in ('+', '-', '*', '/'):
             calc(a, oper)
         else:
             print('Error, try again')
