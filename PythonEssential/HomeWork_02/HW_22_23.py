@@ -1,3 +1,15 @@
+"""Задание 2
+
+Опишите классы графического объекта, прямоугольника и объекта, который может обрабатывать нажатия мыши. Опишите класс
+кнопки. Создайте объект кнопки и обычного прямоугольника. Вызовите метод нажатия на кнопку.
+
+Задание 3
+
+Создайте иерархию классов с использованием множественного наследования. Выведите на экран порядок разрешения методов
+для каждого из классов. Объясните, почему линеаризации данных классов выглядят именно так.
+"""
+
+
 class GraphicObject(object):
 
     _dimensions = 2
@@ -9,7 +21,7 @@ class GraphicObject(object):
     _width = 1
     _height = 1
 
-    def __init__(self, dim , display, background , style, position_x, position_y, width, height):
+    def __init__(self, dim, display, background, style, position_x, position_y, width, height):
         self._dimensions = dim
         self._display = display
         self._background = background
@@ -76,9 +88,9 @@ class Clickable(object):
 
 class Button(Rectangle, Clickable):
 
-    def __init__(self,dim, display, background, style, position_X, position_Y, width, height, action, args=[],
+    def __init__(self, dim, display, background, style, position_X, position_Y, width, height, action, args=[],
                  trigger='Click'):
-        Rectangle.__init__(self, dim, display, background , style, position_X, position_Y, width, height)
+        Rectangle.__init__(self, dim, display, background, style, position_X, position_Y, width, height)
         Clickable.__init__(self, action, args, trigger)
 
 

@@ -1,3 +1,6 @@
+"""Напишите итератор, который возвращает элементы заданного списка в обратном порядке (аналог reversed)."""
+
+
 class ReversedList:
     def __init__(self, list_to_reverse):
         self.list_to_reverse = list_to_reverse

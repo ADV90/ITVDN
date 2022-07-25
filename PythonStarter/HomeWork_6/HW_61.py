@@ -1,5 +1,9 @@
-'''Built-in Functions
-The Python interpreter has a number of functions and types built into it that are always available. They are listed here in alphabetical order.
+"""Прочитайте в документации по языку Python информацию о перечисленных в резюме данного урока стандартных функциях.
+Проверьте их на практике.
+
+Built-in Functions
+The Python interpreter has a number of functions and types built into it that are always available.
+They are listed here in alphabetical order.
 
 Built-in Functions
 
@@ -113,4 +117,4 @@ zip()
 
 _
 __import__()
-'''
+"""
