@@ -1,6 +1,16 @@
-class MyObject:
-    __value = 0
+class A:
+    def method(self):
+        return "A"
 
-instance = MyObject()
-instance.__value = 1
-print(instance.__value)
+class B(A):
+    def method(self):
+        return "B"
+
+class C(A):
+    def method(self):
+        return "C"
+
+class D(B, C):
+    pass
+
+D().method()
