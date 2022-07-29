@@ -57,7 +57,7 @@ book4 = Book(
 
 print(book1 == book2 == book3 == book4, '\n')
 
-books = Book(book1, book2, book3, book4)
-
-print(books.__str__())
-print(repr(books))
+books = [book1, book2, book3, book4]
+for book in books:
+    print(book)
+    # print(repr(book))

@@ -5,7 +5,7 @@
 """
 
 
-class Editor(object):
+class Editor:
     password = input('Enter password to achieve pro features: ')
 
     def __new__(cls):
