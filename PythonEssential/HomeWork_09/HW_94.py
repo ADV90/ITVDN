@@ -21,7 +21,7 @@ def print_products():
 
 
 def save():
-    pickle.dump(products, open('products.p', 'wb'))
+    pickle.dump(products, open('products.p', 'w'))
     json.dump(products, open('products.json', 'w', encoding="utf8"))
 
 
