@@ -1,5 +1,2 @@
-import base64
-import hashlib
-password = 'maks123456'
-h = hashlib.sha256(password.encode())
-print(base64.b64encode(h.digest()))
+values = {1, 2, 5, 2, 5.0}
+print(len(values))
