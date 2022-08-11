@@ -15,10 +15,11 @@ def main():
         try:
             result = sock.recv(1024)
         except KeyboardInterrupt:
+            sock.close()
             break
         else:
             msg = result.decode('utf-8')
-            if msg.strip().lower() == "stop":
+            if msg.strip().casefold() == "stop":
                 break
             else:
                 print('Добавлено устройство:', msg)

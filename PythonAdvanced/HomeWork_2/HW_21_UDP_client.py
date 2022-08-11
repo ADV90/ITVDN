@@ -14,7 +14,7 @@ def main():
         msgb = msg.encode('utf-8')
         sock.sendto(msgb, ('127.0.0.1', 8888))
 
-        if msg.strip().lower() == "stop":
+        if msg.strip().casefold() == "stop":
             break
 
 

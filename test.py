@@ -1,2 +1,3 @@
-values = {1, 2, 5, 2, 5.0}
-print(len(values))
+netstat -ano | findstr :8888
+
+taskkill /PID 'PID' /F
