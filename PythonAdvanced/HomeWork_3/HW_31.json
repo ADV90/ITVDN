@@ -1,0 +1,46 @@
+{
+    "Cars": [
+        {
+            "id": 1,
+            "Brand": "Ferrari",
+            "Model": "SF90",
+            "Price": 930000
+        },
+        {
+            "id": 2,
+            "Brand": "Brabus",
+            "Model": "G800",
+            "Price": 540000
+        },
+        {
+            "id": 3,
+            "Brand": "KIA",
+            "Model": "K8",
+            "Price": 65000
+        },
+        {
+            "id": 4,
+            "Brand": "Mercedes",
+            "Model": "S63 AMG",
+            "Price": 320000
+        },
+        {
+            "id": 5,
+            "Brand": "Audi",
+            "Model": "Q8",
+            "Price": 93000
+        },
+        {
+            "id": 6,
+            "Brand": "Hyundai",
+            "Model": "Staria",
+            "Price": 89000
+        },
+        {
+            "id": 7,
+            "Brand": "Maserati",
+            "Model": "Levante",
+            "Price": 74700
+        }
+    ]
+}

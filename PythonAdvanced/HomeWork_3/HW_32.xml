@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<cars>
+	<car id="1">
+		<Brand>Ferrari</Brand>
+		<Model>SF90</Model>
+		<Price>930000</Price>
+	</car>
+	<car id="2">
+		<Brand>Brabus</Brand>
+		<Model>G800</Model>
+		<Price>530000</Price>
+	</car>
+	<car id="3">
+		<Brand>KIA</Brand>
+		<Model>K8</Model>
+		<Price>63000</Price>
+	</car>
+	<car id="4">
+		<Brand>Mercedes</Brand>
+		<Model>S63 AMG Coupe</Model>
+		<Price>320000</Price>
+	</car>
+	<car id="5">
+		<Brand>Audi</Brand>
+		<Model>Q8</Model>
+		<Price>93000</Price>
+	</car>
+	<car id="6">
+		<Brand>Hyundai</Brand>
+		<Model>Staria</Model>
+		<Price>89000</Price>
+	</car>
+	<car id="7">
+		<Brand>Maserati</Brand>
+		<Model>Levante</Model>
+		<Price>74700</Price>
+	</car>
+</cars>
