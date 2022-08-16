@@ -1,5 +1,6 @@
 import sqlite3
 import datetime
+from prettytable import PrettyTable
 
 flag = False
 db = sqlite3.connect('test.sqlite3')
@@ -64,6 +65,45 @@ def inc_money():
     flag = False
 
 
+def view_records():
+    def view_cycle(sqlite_list):
+        my_table = PrettyTable()
+        my_table.field_names = ["id", "Назначение", "Сумма", "Date and Time"]
+        total_income = 0.00
+        total_expense = 0.00
+
+        for operation in sqlite_list:
+            if operation[2] > 0:
+                total_income = total_income + operation[2]
+                aop = [f'\033[32m{el}\033[0m' for el in operation]
+                my_table.add_row(aop)
+            elif operation[2] <= 0:
+                total_expense = total_expense + operation[2]
+                aop = [f'\033[31m{el}\033[0m' for el in operation]
+                my_table.add_row(aop)
+
+        total = total_income + total_expense
+        total = '\033[34m'+str(total)+'\033[0m'
+        my_table.add_row([' ', "Total income", total_income, " "])
+        my_table.add_row([' ', "Total expense", total_expense, " "])
+        my_table.add_row([' ', "\033[34m***Total***\033[0m", total, " "])
+        print(my_table)
+        print()
+
+    print("\nВведите 'month' или 'year' чтоб увидеть расходы за месяц или год:")
+    choose_view = input(">")
+    if choose_view == "month":
+        month_view = db.execute(f'SELECT * FROM bank').fetchall()
+        view_cycle(month_view)
+    elif choose_view == "year":
+        day_view = db.execute(f'SELECT * FROM bank WHERE date = '
+                              f'"{datetime.datetime.now().strftime("%d-%m-%Y")}"').fetchall()
+        view_cycle(day_view)
+    else:
+        print("Вы выбрали некорректное значение... Попробуйте еще")
+        view_records()
+
+
 def main():
     create_table()
     print('In this program you can control your finance. This code using sqlite3 database. You can use function: \n'
@@ -72,8 +112,8 @@ def main():
 
     dict_operations = {
         'add': add_record,
-        'inc': inc_money
-        # 'view': view_records
+        'inc': inc_money,
+        'view': view_records
     }
 
     def initial():
