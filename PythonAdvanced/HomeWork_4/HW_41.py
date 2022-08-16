@@ -14,7 +14,7 @@ def create_table():
         id INTEGER AUTO_INCREMENT PRIMARY KEY,
         Назначение TEXT,
         Сумма REAL,
-        Время DATETIME
+        Дата и Время DATETIME
         
         )''')
         db.commit()
@@ -84,21 +84,29 @@ def view_records():
 
         total = total_income + total_expense
         total = '\033[34m'+str(total)+'\033[0m'
-        my_table.add_row([' ', "Total income", total_income, " "])
-        my_table.add_row([' ', "Total expense", total_expense, " "])
-        my_table.add_row([' ', "\033[34m***Total***\033[0m", total, " "])
+        my_table.add_row([' ', 'Суммарный доход', total_income, ' '])
+        my_table.add_row([' ', 'Суммарные расходы', total_expense, ' '])
+        my_table.add_row([' ', '\033[34mВсего\033[0m', total, ' '])
         print(my_table)
         print()
 
-    print("\nВведите 'month' или 'year' чтоб увидеть расходы за месяц или год:")
-    choose_view = input(">")
-    if choose_view == "month":
-        month_view = db.execute(f'SELECT * FROM bank').fetchall()
-        view_cycle(month_view)
-    elif choose_view == "year":
-        day_view = db.execute(f'SELECT * FROM bank WHERE date = '
-                              f'"{datetime.datetime.now().strftime("%d-%m-%Y")}"').fetchall()
-        view_cycle(day_view)
+    print('\nВведите "m" или "a" чтоб увидеть расходы за месяц или за все время:')
+    choose_view = input('>')
+    if choose_view == "m":
+        print("\nВведите год и месяц в формате YYYY-mm: ")
+        datex = input('> ')
+        try:
+            datex = '"' + str(datex) + '%"'
+            # print(datex)
+            month_view = db.execute(f'SELECT * FROM bank WHERE Время LIKE {datex}').fetchall()
+            view_cycle(month_view)
+        except sqlite3.Error as error:
+            print("Ошибка при подключении к sqlite", error)
+        except ValueError or KeyboardInterrupt:
+            print("Вы выбрали некорректное значение...")
+    elif choose_view == "a":
+        all_view = db.execute(f'SELECT * FROM bank').fetchall()
+        view_cycle(all_view)
     else:
         print("Вы выбрали некорректное значение... Попробуйте еще")
         view_records()
@@ -131,4 +139,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
