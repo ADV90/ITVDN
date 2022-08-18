@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 from prettytable import PrettyTable
+import csv
 
 flag = False
 db = sqlite3.connect('test.sqlite3')
@@ -14,18 +15,14 @@ def create_table():
         id INTEGER AUTO_INCREMENT PRIMARY KEY,
         Назначение TEXT,
         Сумма REAL,
-        Дата и Время DATETIME
-        
+        Время DATETIME
+
         )''')
         db.commit()
         # print("Таблица SQLite создана")
 
     except sqlite3.Error as error:
         print("Ошибка при подключении к sqlite", error)
-    # finally:
-    #     if (db):
-    #         db.close()
-    #         print("Соединение с SQLite закрыто\n")
 
 
 def add_record():
@@ -38,8 +35,8 @@ def add_record():
     else:
         id = id + 1
     try:
-        purpose = input("Назначение: ")
-        s = input("Сумма(UAH): ")
+        purpose = input('Введите код MCC в диапазоне от "0000" до "9999": ')
+        s = input('Сумма(UAH): ')
         if flag == True:
             sum = format(float(s), '.2f')
         else:
@@ -66,9 +63,11 @@ def inc_money():
 
 
 def view_records():
+    mccd = []
+
     def view_cycle(sqlite_list):
         my_table = PrettyTable()
-        my_table.field_names = ["id", "Назначение", "Сумма", "Date and Time"]
+        my_table.field_names = ["id", "MCC", "Сумма", "Date and Time", "Назначение"]
         total_income = 0.00
         total_expense = 0.00
 
@@ -83,12 +82,27 @@ def view_records():
                 my_table.add_row(aop)
 
         total = total_income + total_expense
-        total = '\033[34m'+str(total)+'\033[0m'
-        my_table.add_row([' ', 'Суммарный доход', total_income, ' '])
-        my_table.add_row([' ', 'Суммарные расходы', total_expense, ' '])
-        my_table.add_row([' ', '\033[34mВсего\033[0m', total, ' '])
+        total = '\033[34m' + str(total) + '\033[0m'
+        my_table.add_row([' ', 'Суммарный доход', total_income, ' ', ' '])
+        my_table.add_row([' ', 'Суммарные расходы', total_expense, ' ', ' '])
+        my_table.add_row([' ', '\033[34mВсего\033[0m', total, ' ', ' '])
         print(my_table)
         print()
+
+    def mcc_code(sqlite_list):
+        with open('mcc_codes.csv', 'r', encoding='utf-8') as f:
+            reader = csv.reader(f, delimiter=',')
+            mccs = {row[0]: row[1] for row in reader}
+
+        for operation in sqlite_list:
+            if operation[1] in mccs.keys():
+                operation = operation + (mccs[operation[1]],)
+            else:
+                operation = operation + ('Неверный код MCC или отсутствует описание',)
+            mccd.append(operation)
+            # print(operation)
+        # print(mccd)
+        view_cycle(mccd)
 
     print('\nВведите "m" или "a" чтоб увидеть расходы за месяц или за все время:')
     choose_view = input('>')
@@ -99,14 +113,14 @@ def view_records():
             datex = '"' + str(datex) + '%"'
             # print(datex)
             month_view = db.execute(f'SELECT * FROM bank WHERE Время LIKE {datex}').fetchall()
-            view_cycle(month_view)
+            mcc_code(month_view)
         except sqlite3.Error as error:
             print("Ошибка при подключении к sqlite", error)
         except ValueError or KeyboardInterrupt:
             print("Вы выбрали некорректное значение...")
     elif choose_view == "a":
         all_view = db.execute(f'SELECT * FROM bank').fetchall()
-        view_cycle(all_view)
+        mcc_code(all_view)
     else:
         print("Вы выбрали некорректное значение... Попробуйте еще")
         view_records()
@@ -139,5 +153,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
