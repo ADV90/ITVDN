@@ -30,7 +30,7 @@ def create_table():
         print("База данных подключена к SQLite")
         c.execute('''CREATE TABLE IF NOT EXISTS bank (
         id INTEGER AUTO_INCREMENT PRIMARY KEY,
-        Назначение TEXT,
+        MCC TEXT,
         Сумма REAL,
         Время DATETIME
 
