@@ -47,14 +47,14 @@ def add_record():
     db = sqlite3.connect('test.sqlite3')
     c = db.cursor()
     id = c.execute(f"SELECT max(id) FROM bank ORDER BY id DESC LIMIT 1").fetchone()[0]
-    if id == None:
+    if id is None:
         id = 1
     else:
         id = id + 1
     try:
         purpose = input('Введите код MCC в диапазоне от "0000" до "9999": ')
         s = input('Сумма(UAH): ')
-        if flag == True:
+        if flag is True:
             sum = format(float(s), '.2f')
         else:
             sum = format(-float(s), '.2f')
